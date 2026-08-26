@@ -62,7 +62,7 @@ export default async function EvidenceVault({ params }: { params: { id: string }
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {decision.evidence.map(ev => (
+          {decision.evidence.map((ev: any) => (
             <div key={ev.id} className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col h-full">
               <div className="flex justify-between items-start mb-4">
                 <div className={`px-2.5 py-1 rounded-md text-xs font-bold uppercase tracking-wider border ${getClassificationColor(ev.classification)}`}>
@@ -86,7 +86,7 @@ export default async function EvidenceVault({ params }: { params: { id: string }
                 {ev.assumptionLinks.length > 0 && (
                   <div className="space-y-2">
                     <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Linked to:</p>
-                    {ev.assumptionLinks.map(link => (
+                    {ev.assumptionLinks.map((link: any) => (
                       <div key={link.assumptionId} className="text-xs text-blue-700 bg-blue-50 px-2 py-1.5 rounded truncate border border-blue-100">
                         {link.assumption.title}
                       </div>

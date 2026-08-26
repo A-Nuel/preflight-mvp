@@ -80,7 +80,24 @@ export async function GET(req: Request) {
         strength: "strong",
         assumptionLinks: {
           create: [
-            { assumptionId: assumptions.find(a => a.title === "Willingness to Trust AI")!.id }
+            { assumptionId: assumptions.find((a: any) => a.title === "Willingness to Trust AI")!.id }
+          ]
+        }
+      }
+    });
+
+    await prisma.evidence.create({
+      data: {
+        decisionId: decision.id,
+        source: "Reddit r/restaurateur",
+        content: "Just spent my entire Sunday categorizing Toast receipts. I want to die.",
+        type: "observation",
+        classification: "supports",
+        nature: "USER CLAIM",
+        strength: "moderate",
+        assumptionLinks: {
+          create: [
+            { assumptionId: assumptions.find((a: any) => a.title === "High Pain Point")!.id }
           ]
         }
       }

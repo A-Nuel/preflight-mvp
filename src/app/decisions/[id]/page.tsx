@@ -17,11 +17,11 @@ export default async function DecisionDashboard({ params }: { params: { id: stri
     notFound();
   }
 
-  const blindSpots = decision.assumptions.filter(a => a.isBlindSpot);
-  const coreAssumptions = decision.assumptions.filter(a => !a.isBlindSpot);
+  const blindSpots = decision.assumptions.filter((a: any) => a.isBlindSpot);
+  const coreAssumptions = decision.assumptions.filter((a: any) => !a.isBlindSpot);
   
   // Find top critical assumptions
-  const criticalAssumptions = [...coreAssumptions].sort((a, b) => {
+  const criticalAssumptions = [...coreAssumptions].sort((a: any, b: any) => {
     const imp = { 'low': 1, 'medium': 2, 'high': 3, 'critical': 4 };
     return (imp[b.importance as keyof typeof imp] || 0) - (imp[a.importance as keyof typeof imp] || 0);
   }).slice(0, 3);
@@ -112,7 +112,7 @@ export default async function DecisionDashboard({ params }: { params: { id: stri
               </div>
               
               <div className="space-y-4">
-                {coreAssumptions.map(assumption => (
+                {coreAssumptions.map((assumption: any) => (
                   <div key={assumption.id} className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm hover:border-slate-300 transition-colors">
                     <div className="flex justify-between items-start mb-3">
                       <h3 className="font-semibold text-lg">{assumption.title}</h3>
@@ -154,7 +154,7 @@ export default async function DecisionDashboard({ params }: { params: { id: stri
                 <ShieldAlert className="w-5 h-5" /> Blind Spots
               </h2>
               <div className="space-y-4">
-                {blindSpots.map(spot => (
+                {blindSpots.map((spot: any) => (
                   <div key={spot.id} className="bg-white border border-red-100 rounded-xl p-4 shadow-sm">
                     <h3 className="font-semibold text-red-900 text-sm mb-1">{spot.title}</h3>
                     <p className="text-slate-600 text-xs">{spot.description}</p>
@@ -173,7 +173,7 @@ export default async function DecisionDashboard({ params }: { params: { id: stri
               <p className="text-sm text-slate-500 mb-4">Resolving these assumptions will move the readiness score the most.</p>
               
               <div className="space-y-3">
-                {criticalAssumptions.map((a, i) => (
+                {criticalAssumptions.map((a: any, i: number) => (
                   <div key={a.id} className="flex gap-3 items-start">
                     <div className="w-6 h-6 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-xs font-bold shrink-0">
                       {i + 1}

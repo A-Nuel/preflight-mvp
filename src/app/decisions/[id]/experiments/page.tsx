@@ -39,7 +39,7 @@ export default async function Experiments({ params }: { params: { id: string } }
         </div>
 
         <div className="space-y-8">
-          {decision.experiments.map(exp => (
+          {decision.experiments.map((exp: any) => (
             <div key={exp.id} className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
               <div className="border-b border-slate-100 bg-slate-50 p-6 flex items-start justify-between">
                 <div>

@@ -53,7 +53,7 @@ export default async function BusinessRadar({ params }: { params: { id: string }
               <Zap className="w-4 h-4" /> You may not be looking at this
             </h2>
             <div className="grid gap-6">
-              {crossSignals.map(signal => (
+              {crossSignals.map((signal: any) => (
                 <div key={signal.id} className="bg-indigo-900 text-white rounded-2xl p-8 shadow-lg relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>
                   <div className="relative z-10">
@@ -82,7 +82,7 @@ export default async function BusinessRadar({ params }: { params: { id: string }
         <section>
           <h2 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Detected Signals</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {otherSignals.map(signal => (
+            {otherSignals.map((signal: any) => (
               <div key={signal.id} className="bg-white rounded-xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex items-center gap-3">

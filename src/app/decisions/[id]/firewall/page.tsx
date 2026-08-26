@@ -64,7 +64,7 @@ export default async function DecisionFirewall({ params }: { params: { id: strin
           <div className="bg-slate-800/50 border border-slate-700/50 rounded-2xl p-6">
             <h3 className="text-slate-400 uppercase text-xs font-bold tracking-wider mb-4">Biggest Weakness</h3>
             <p className="text-white text-lg">
-              {decision.assumptions.find(a => a.status === 'contradicted' || (a.status === 'uncertain' && a.importance === 'critical'))?.title || "No major weaknesses detected."}
+              {decision.assumptions.find((a: any) => a.status === 'contradicted' || (a.status === 'uncertain' && a.importance === 'critical'))?.title || "No major weaknesses detected."}
             </p>
           </div>
           
