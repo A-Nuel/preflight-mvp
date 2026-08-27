@@ -50,10 +50,10 @@ export default function Home() {
               Start a decision <ArrowRight className="w-4 h-4" />
             </Link>
             <Link 
-              href="/api/demo/seed" 
+              href="/demo" 
               className="inline-flex items-center justify-center gap-2 text-base font-medium bg-white text-slate-700 px-8 py-4 rounded-xl hover:bg-slate-50 transition-all shadow-sm border border-slate-200"
             >
-              Load Demo Scenario
+              Explore Static Demo
             </Link>
           </div>
         </div>
