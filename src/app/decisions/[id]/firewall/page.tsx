@@ -5,9 +5,10 @@ import { ArrowLeft, ShieldCheck, AlertTriangle, HelpCircle, Play, Ban } from "lu
 
 const prisma = new PrismaClient();
 
-export default async function DecisionFirewall({ params }: { params: { id: string } }) {
+export default async function DecisionFirewall({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const decision = await prisma.decision.findUnique({
-    where: { id: params.id },
+    where: { id },
     include: {
       assumptions: true,
       experiments: {

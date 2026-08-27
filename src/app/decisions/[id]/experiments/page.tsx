@@ -5,9 +5,10 @@ import { ArrowLeft, ArrowRight, FlaskConical, CheckCircle2, Play, AlertCircle } 
 
 const prisma = new PrismaClient();
 
-export default async function Experiments({ params }: { params: { id: string } }) {
+export default async function Experiments({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const decision = await prisma.decision.findUnique({
-    where: { id: params.id },
+    where: { id },
     include: {
       experiments: {
         include: { result: true }
