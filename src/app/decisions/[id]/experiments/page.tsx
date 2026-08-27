@@ -1,7 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, FlaskConical, CheckCircle2, Play, AlertCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, FlaskConical, CheckCircle2, Play, AlertCircle } from "lucide-react";
 
 const prisma = new PrismaClient();
 
