@@ -1,11 +1,7 @@
-@import "tailwindcss";
+const fs = require('fs');
+let css = fs.readFileSync('src/app/globals.css', 'utf8');
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
+const colors = `
   --color-tertiary-fixed: #ffdadb;
   --color-error-container: #93000a;
   --color-surface-deep: #040509;
@@ -42,22 +38,8 @@
   --color-success-emerald: #10B981;
   --color-inverse-on-surface: #303033;
   --color-primary: #bec2ff;
+`;
 
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+css = css.replace('@theme inline {', '@theme inline {' + colors);
+fs.writeFileSync('src/app/globals.css', css);
+console.log('Done!');
