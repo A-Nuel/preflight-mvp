@@ -53,11 +53,11 @@ export default function NewDecision() {
 </div>
 {/* Form Container */}
 <div className="w-full max-w-2xl glass-card rounded-xl p-gutter relative overflow-hidden">
-<form className="space-y-8 relative z-10" id="decision-form">
+<form className="space-y-8 relative z-10" onSubmit={handleSubmit}>
 {/* Objective Input */}
 <div className="group">
 <label className="block font-mono-label text-mono-label text-primary mb-2 uppercase" for="objective">Strategic Objective</label>
-<input className="w-full terminal-input font-body-lg text-body-lg py-2" id="objective" placeholder="e.g., Optimize Q3 supply chain routing for European markets" required="" type="text"/>
+<input className="w-full terminal-input font-body-lg text-body-lg py-2" id="objective" placeholder="e.g., Optimize Q3 supply chain routing for European markets" required type="text" value={statement} onChange={(e) => setStatement(e.target.value)} />
 </div>
 {/* Parameters Grid */}
 <div className="grid grid-cols-1 md:grid-cols-2 gap-bento-gap">
