@@ -63,17 +63,17 @@ export default function NewDecision() {
 <div className="grid grid-cols-1 md:grid-cols-2 gap-bento-gap">
 <div className="group">
 <label className="block font-mono-label text-mono-label text-on-surface-variant mb-2 uppercase" htmlFor="risk-tolerance">Risk Tolerance</label>
-<select className="w-full terminal-input font-body-md text-body-md py-2 appearance-none bg-transparent" id="risk-tolerance">
+<select className="w-full terminal-input font-body-md text-body-md py-2 appearance-none bg-transparent" id="risk-tolerance" defaultValue="medium">
 <option className="bg-surface-container" value="low">Low (Conservative)</option>
-<option className="bg-surface-container" selected="" value="medium">Medium (Balanced)</option>
+<option className="bg-surface-container" value="medium">Medium (Balanced)</option>
 <option className="bg-surface-container" value="high">High (Aggressive)</option>
 </select>
 </div>
 <div className="group">
 <label className="block font-mono-label text-mono-label text-on-surface-variant mb-2 uppercase" htmlFor="time-horizon">Time Horizon</label>
-<select className="w-full terminal-input font-body-md text-body-md py-2 appearance-none bg-transparent" id="time-horizon">
+<select className="w-full terminal-input font-body-md text-body-md py-2 appearance-none bg-transparent" id="time-horizon" defaultValue="medium">
 <option className="bg-surface-container" value="short">Short-term (0-3 Months)</option>
-<option className="bg-surface-container" selected="" value="medium">Medium-term (3-12 Months)</option>
+<option className="bg-surface-container" value="medium">Medium-term (3-12 Months)</option>
 <option className="bg-surface-container" value="long">Long-term (1-5 Years)</option>
 </select>
 </div>
@@ -81,7 +81,7 @@ export default function NewDecision() {
 {/* Data Sources Input */}
 <div className="group">
 <label className="block font-mono-label text-mono-label text-on-surface-variant mb-2 uppercase" htmlFor="data-sources">Data Ingestion Endpoints (Optional)</label>
-<textarea className="w-full terminal-input font-quote-data text-quote-data py-2 resize-none" id="data-sources" placeholder="Provide URLs or connection strings for bespoke datasets..." rows="2"></textarea>
+<textarea className="w-full terminal-input font-quote-data text-quote-data py-2 resize-none" id="data-sources" placeholder="Provide URLs or connection strings for bespoke datasets..." rows={2}></textarea>
 </div>
 {/* Action Bar */}
 <div className="pt-4 flex justify-end">
