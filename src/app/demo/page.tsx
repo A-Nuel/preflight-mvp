@@ -1,182 +1,185 @@
-import Link from "next/link";
-import { ArrowRight, AlertTriangle, ShieldAlert, Target, ShieldQuestion } from "lucide-react";
+import Link from 'next/link';
 
-export default function StaticDemoDashboard() {
-  // Hardcoded mock data so the demo works instantly without database or AI
+export default function DemoDashboard() {
   const decision = {
-    id: "demo-decision-123",
-    statement: "Should we build an AI bookkeeping app for small independent restaurants?",
-    targetCustomer: "Independent restaurant owners with $1M-$5M revenue",
-    status: "analyzing",
-    readinessScore: 32,
-    assumptions: [
-      {
-        id: "a1",
-        statement: "Restaurant owners will trust AI to categorize their daily expenses without manual review.",
-        category: "user_behavior",
-        importance: "critical",
-        status: "uncertain",
-        isBlindSpot: false,
-        reasoning: "Bookkeeping requires high precision. Trust in AI for this specific financial task is unproven."
-      },
-      {
-        id: "a2",
-        statement: "Owners currently spend more than 10 hours a month on bookkeeping.",
-        category: "pain_point",
-        importance: "high",
-        status: "supported",
-        isBlindSpot: false,
-        reasoning: "Based on general SMB data, bookkeeping is a major time sink."
-      },
-      {
-        id: "a3",
-        statement: "Most restaurants use legacy POS systems that do not integrate easily with modern APIs.",
-        category: "technical",
-        importance: "critical",
-        status: "uncertain",
-        isBlindSpot: true,
-        reasoning: "If we cannot ingest data automatically, the product offers no value. POS fragmentation is notoriously high in hospitality."
-      }
-    ]
-  };
+  id: "DEMO-12345",
+  statement: "Launch new AI-powered predictive market analysis tool targeting enterprise clients.",
+  readinessScore: 85,
+  assumptions: [
+    { id: '1', title: 'Market Demand', description: 'Enterprise clients want predictive analytics.', status: 'VALIDATED', importance: 'high' },
+    { id: '2', title: 'Pricing Strategy', description: 'Current SaaS pricing model is acceptable.', status: 'TESTING', importance: 'medium' },
+    { id: '3', title: 'Data Privacy Blind Spot', description: 'Enterprise data compliance requirements (GDPR/SOC2) may block adoption.', status: 'CRITICAL', importance: 'critical' },
+  ]
+};
 
-  const blindSpots = decision.assumptions.filter(a => a.isBlindSpot);
-  const coreAssumptions = decision.assumptions.filter(a => !a.isBlindSpot);
-  
-  const criticalAssumptions = [...coreAssumptions].sort((a, b) => {
-    const imp = { 'low': 1, 'medium': 2, 'high': 3, 'critical': 4 };
-    return (imp[b.importance as keyof typeof imp] || 0) - (imp[a.importance as keyof typeof imp] || 0);
-  });
-
-  const getReadinessColor = (score: number) => {
-    if (score < 40) return "text-red-600 bg-red-50 border-red-100";
-    if (score < 60) return "text-orange-600 bg-orange-50 border-orange-100";
-    if (score < 75) return "text-yellow-600 bg-yellow-50 border-yellow-100";
-    if (score < 90) return "text-emerald-600 bg-emerald-50 border-emerald-100";
-    return "text-blue-600 bg-blue-50 border-blue-100";
-  };
-
-  const getReadinessLabel = (score: number) => {
-    if (score < 40) return "NOT READY";
-    if (score < 60) return "WEAK EVIDENCE";
-    if (score < 75) return "DEVELOPING";
-    if (score < 90) return "STRONG BASIS";
-    return "HIGH CONFIDENCE";
-  };
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'supported': return 'bg-emerald-100 text-emerald-800';
-      case 'contradicted': return 'bg-red-100 text-red-800';
-      case 'uncertain': return 'bg-yellow-100 text-yellow-800';
-      default: return 'bg-slate-100 text-slate-800';
-    }
-  };
+  const coreAssumptions = decision.assumptions.filter((a) => !a.title.toLowerCase().includes('blind'));
+  const blindSpots = decision.assumptions.filter((a) => a.title.toLowerCase().includes('blind'));
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 pb-20">
-      {/* Top Nav */}
-      <nav className="bg-white border-b border-slate-200 px-8 py-4 sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">P</span>
-            </div>
-            <span className="font-semibold text-lg tracking-tight">Preflight</span>
-            <span className="ml-2 bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full font-medium">STATIC DEMO</span>
-          </Link>
-          <div className="flex gap-4">
-            <button className="text-sm font-medium text-slate-400 py-2 px-3 cursor-not-allowed">Evidence Vault</button>
-            <button className="text-sm font-medium text-slate-400 py-2 px-3 cursor-not-allowed">Business Radar</button>
-            <button className="text-sm font-medium text-slate-400 py-2 px-3 cursor-not-allowed">Experiments</button>
-            <button className="text-sm font-medium bg-slate-200 text-slate-400 py-2 px-4 rounded-lg cursor-not-allowed">Decision Firewall</button>
-          </div>
-        </div>
-      </nav>
+    <>
+{/* Atmospheric Glows */}
+<div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+<div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-primary rounded-full mix-blend-screen filter blur-[200px] opacity-20 animate-pulse-glow"></div>
+<div className="absolute bottom-[-20%] right-[10%] w-[60%] h-[60%] bg-secondary rounded-full mix-blend-screen filter blur-[250px] opacity-10 animate-pulse-glow" style={{"animationDelay":"3s"}}></div>
+</div>
+{/* Telemetry Bar */}
+<div className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent z-50"></div>
+<div className="fixed top-2 right-4 z-50 flex items-center gap-2 font-mono-label text-[10px] text-on-surface-variant/50 tracking-widest">
+<span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+    SYSTEM ONLINE // VER 4.9.2 // LATENCY: 14ms
+</div>
+{/* Main Workspace */}
+<main className="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 md:py-16 flex flex-col gap-12">
+{/* Header & Action Row */}
+<header className="flex flex-col md:flex-row md:items-center justify-between gap-8">
+<div className="flex flex-col gap-6">
+<Link className="inline-flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors font-mono-label text-[11px] tracking-widest uppercase w-fit group" href={`/decisions/${decision.id}`}>
+<span className="material-symbols-outlined text-[16px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                    RETURN TO COMMAND
+                </Link>
+<div>
+<h1 className="font-display text-headline-lg-mobile md:text-[2rem] leading-tight text-on-surface tracking-tight max-w-4xl">{decision.statement}</h1>
+<div className="flex items-center gap-3 mt-3">
+<span className="font-mono-label text-xs text-primary bg-primary/10 px-2 py-1 rounded border border-primary/20">ID: {decision.id.substring(0, 8).toUpperCase()}</span>
+<span className="font-mono-label text-xs text-on-surface-variant tracking-widest">OP-PHOENIX</span>
+</div>
+</div>
+</div>
+{/* Decision Readiness Dial */}
+<div className="flex items-center gap-6 glass-card rounded-2xl pr-8 pl-6 py-4 relative group overflow-hidden">
+<div className="absolute inset-0 bg-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div className="relative w-28 h-28">
+<svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+<circle className="dial-track" cx="50" cy="50" fill="none" r="45" strokeWidth="2"></circle>
+{/* Background tick marks */}
+<g stroke="rgba(255,255,255,0.05)" strokeWidth="1">
+<line transform="rotate(0 50 50)" x1="50" x2="50" y1="2" y2="5"></line>
+<line transform="rotate(45 50 50)" x1="50" x2="50" y1="2" y2="5"></line>
+<line transform="rotate(90 50 50)" x1="50" x2="50" y1="2" y2="5"></line>
+<line transform="rotate(135 50 50)" x1="50" x2="50" y1="2" y2="5"></line>
+<line transform="rotate(180 50 50)" x1="50" x2="50" y1="2" y2="5"></line>
+<line transform="rotate(225 50 50)" x1="50" x2="50" y1="2" y2="5"></line>
+<line transform="rotate(270 50 50)" x1="50" x2="50" y1="2" y2="5"></line>
+<line transform="rotate(315 50 50)" x1="50" x2="50" y1="2" y2="5"></line>
+</g>
+<circle className="dial-progress-glow" cx="50" cy="50" fill="none" r="45" strokeLinecap="round" strokeWidth="4" strokeDasharray="283" strokeDashoffset={283 - (283 * decision.readinessScore) / 100} style={{ stroke: "theme('colors.secondary')", filter: "blur(4px)", transition: "stroke-dashoffset 1s ease-out" }}></circle>
+<circle className="dial-progress" cx="50" cy="50" fill="none" r="45" strokeLinecap="round" strokeWidth="2" strokeDasharray="283" strokeDashoffset={283 - (283 * decision.readinessScore) / 100} style={{ stroke: "theme('colors.secondary')", transition: "stroke-dashoffset 1s ease-out" }}></circle>
+</svg>
+<div className="absolute inset-0 flex items-center justify-center flex-col">
+<span className="font-display text-headline-lg-mobile text-secondary tracking-tighter">{decision.readinessScore}<span className="text-sm font-mono-label text-secondary/70">%</span></span>
+</div>
+</div>
+<div className="flex flex-col justify-center gap-1">
+<span className="font-mono-label text-[10px] text-secondary tracking-[0.2em] uppercase">Decision Readiness</span>
+<span className="font-body-md text-on-surface text-sm">Status: GO Threshold Met</span>
+<span className="font-mono-label text-[10px] text-on-surface-variant mt-1">SYS.CONF: HIGH</span>
+</div>
+</div>
+</header>
+{/* In-page Navigation */}
+<nav className="flex items-center gap-2 border-b border-glass-stroke/50 pb-4 overflow-x-auto no-scrollbar">
+<button className="px-5 py-1.5 rounded-full bg-primary/10 text-primary border border-primary/30 font-mono-label text-xs transition-colors whitespace-nowrap shadow-[0_0_10px_rgba(192,193,255,0.1)]">Radar</button>
+<button className="px-5 py-1.5 rounded-full text-on-surface-variant hover:bg-glass-fill hover:text-on-surface font-mono-label text-xs transition-colors whitespace-nowrap border border-transparent hover:border-glass-stroke">Vault</button>
+<button className="px-5 py-1.5 rounded-full text-on-surface-variant hover:bg-glass-fill hover:text-on-surface font-mono-label text-xs transition-colors whitespace-nowrap border border-transparent hover:border-glass-stroke">Experiments</button>
+<button className="px-5 py-1.5 rounded-full text-on-surface-variant hover:bg-glass-fill hover:text-on-surface font-mono-label text-xs transition-colors whitespace-nowrap border border-transparent hover:border-glass-stroke">Firewall</button>
+</nav>
+{/* Content Grid (Fluid Bento) */}
+<div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+{/* Assumptions Grid: Main Overview (Spans 8 cols) */}
+<section className="glass-card rounded-2xl p-6 md:p-8 col-span-1 md:col-span-8 flex flex-col gap-6">
+<header className="flex justify-between items-center border-b border-glass-stroke/50 pb-4">
+<div>
+<h2 className="font-body-lg text-lg text-on-surface font-semibold tracking-tight">Assumptions Matrix</h2>
+<p className="font-mono-label text-[10px] text-on-surface-variant tracking-[0.2em] mt-1 uppercase">Confidence Interval Mapping</p>
+</div>
+<span className="material-symbols-outlined text-on-surface-variant/50 text-[20px]">analytics</span>
+</header>
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-grow">
+{/* Standard Assumption */}
+<div className="p-5 rounded-xl bg-surface/50 border border-glass-stroke hover:border-secondary/30 transition-all flex flex-col gap-4 relative overflow-hidden group">
+<div className="absolute inset-0 bg-emerald-glow opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+<div className="relative z-10 flex justify-between items-start">
+<span className="font-mono-label text-xs text-on-surface bg-surface-variant/50 border border-glass-stroke px-2.5 py-1 rounded">A-01</span>
+<div className="flex items-center gap-1.5">
+<span className="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span className="font-mono-label text-[10px] text-secondary tracking-widest uppercase">Node Active</span>
+</div>
+</div>
+<p className="relative z-10 font-body-md text-on-surface/90 text-sm leading-relaxed">Market conditions remain stable through Q3.</p>
+<div className="relative z-10 mt-auto pt-4">
+<div className="flex justify-between font-mono-label text-[10px] text-on-surface-variant mb-2 uppercase tracking-wider">
+<span>Confidence</span>
+<span className="text-secondary">92%</span>
+</div>
+<div className="w-full h-[2px] bg-glass-stroke overflow-hidden relative">
+<div className="absolute inset-y-0 left-0 bg-secondary w-[92%] shadow-[0_0_8px_rgba(78,222,163,0.8)]"></div>
+</div>
+</div>
+</div>
+{/* Blind Spot (Warning) */}
+<div className="p-5 rounded-xl bg-surface/50 border border-error/20 animate-critical flex flex-col gap-4 relative overflow-hidden group">
+<div className="absolute inset-0 bg-crimson-glow opacity-30 group-hover:opacity-50 transition-opacity duration-500"></div>
+<div className="absolute top-0 right-0 w-16 h-16 bg-error/10 filter blur-xl rounded-full"></div>
+<div className="relative z-10 flex justify-between items-start">
+<span className="font-mono-label text-xs text-error bg-error/10 border border-error/20 px-2.5 py-1 rounded shadow-[0_0_10px_rgba(255,180,171,0.1)]">BLIND SPOT: B-04</span>
+<div className="flex items-center gap-1.5">
+<span className="w-1.5 h-1.5 rounded-full bg-error animate-pulse"></span>
+<span className="font-mono-label text-[10px] text-error tracking-widest uppercase">Critical</span>
+</div>
+</div>
+<p className="relative z-10 font-body-md text-on-surface/90 text-sm leading-relaxed">Competitor AI deployment latency unknown.</p>
+<div className="relative z-10 mt-auto pt-4">
+<div className="flex justify-between font-mono-label text-[10px] text-error/80 mb-2 uppercase tracking-wider">
+<span>Confidence</span>
+<span className="text-error">34%</span>
+</div>
+<div className="w-full h-[2px] bg-glass-stroke overflow-hidden relative">
+<div className="absolute inset-y-0 left-0 bg-error w-[34%] shadow-[0_0_8px_rgba(255,180,171,0.8)]"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+{/* Radar Vis (Spans 4 cols) */}
+<section className="glass-card rounded-2xl p-6 md:p-8 col-span-1 md:col-span-4 flex flex-col gap-6 items-center justify-center text-center">
+<header className="w-full flex justify-between items-center border-b border-glass-stroke/50 pb-4">
+<h3 className="font-mono-label text-[10px] text-on-surface-variant tracking-[0.2em] uppercase">Strategic Vector</h3>
+<span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+</header>
+<div className="relative w-full aspect-square max-w-[220px] mx-auto py-4">
+<svg className="w-full h-full overflow-visible" viewBox="0 0 100 100">
+{/* Radar Grid Rings */}
+<polygon className="radar-grid" fill="none" points="50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5"></polygon>
+<polygon className="radar-grid" fill="none" points="50,20 80,35 80,65 50,80 20,65 20,35"></polygon>
+<polygon className="radar-grid" fill="none" points="50,35 65,42.5 65,57.5 50,65 35,57.5 35,42.5"></polygon>
+{/* Axis Lines */}
+<g stroke="rgba(255,255,255,0.05)" strokeWidth="1">
+<line x1="50" x2="50" y1="50" y2="5"></line>
+<line x1="50" x2="95" y1="50" y2="27.5"></line>
+<line x1="50" x2="95" y1="50" y2="72.5"></line>
+<line x1="50" x2="50" y1="50" y2="95"></line>
+<line x1="50" x2="5" y1="50" y2="72.5"></line>
+<line x1="50" x2="5" y1="50" y2="27.5"></line>
+</g>
+{/* Data Area */}
+<polygon className="radar-area" points="50,15 85,30 75,70 50,85 15,65 25,35"></polygon>
+{/* Data Points (Glowing) */}
+<circle cx="50" cy="15" fill="theme('colors.primary')" filter="drop-shadow(0 0 4px theme('colors.primary'))" r="2"></circle>
+<circle cx="85" cy="30" fill="theme('colors.primary')" filter="drop-shadow(0 0 4px theme('colors.primary'))" r="2"></circle>
+<circle cx="75" cy="70" fill="theme('colors.primary')" filter="drop-shadow(0 0 4px theme('colors.primary'))" r="2"></circle>
+<circle cx="50" cy="85" fill="theme('colors.primary')" filter="drop-shadow(0 0 4px theme('colors.primary'))" r="2"></circle>
+<circle cx="15" cy="65" fill="theme('colors.primary')" filter="drop-shadow(0 0 4px theme('colors.primary'))" r="2"></circle>
+<circle cx="25" cy="35" fill="theme('colors.primary')" filter="drop-shadow(0 0 4px theme('colors.primary'))" r="2"></circle>
+</svg>
+</div>
+<div className="flex gap-6 font-mono-label text-[10px] justify-center flex-wrap uppercase tracking-wider mt-2">
+<span className="flex items-center gap-2 text-on-surface/80"><span className="w-1.5 h-1.5 rounded-full bg-primary shadow-[0_0_8px_theme('colors.primary')]"></span> Current</span>
+<span className="flex items-center gap-2 text-on-surface-variant"><span className="w-1.5 h-1.5 rounded-full border border-glass-stroke"></span> Target</span>
+</div>
+</section>
+</div>
+</main>
 
-      <main className="max-w-6xl mx-auto px-8 pt-10">
-        
-        {/* Header */}
-        <div className="flex flex-col md:flex-row gap-8 justify-between items-start mb-12">
-          <div className="max-w-3xl">
-            <h4 className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">The Decision</h4>
-            <h1 className="text-3xl font-bold leading-tight mb-4">{decision.statement}</h1>
-            <p className="text-slate-500">
-              Target: <span className="text-slate-700 font-medium">{decision.targetCustomer || 'Not specified'}</span> • 
-              Status: <span className="text-slate-700 font-medium">{decision.status}</span>
-            </p>
-          </div>
-          
-          {/* Readiness Score Card */}
-          <div className={`flex flex-col items-center justify-center p-6 rounded-2xl border ${getReadinessColor(decision.readinessScore)} min-w-[200px]`}>
-            <div className="text-5xl font-black mb-1">{decision.readinessScore}</div>
-            <div className="text-sm font-bold uppercase tracking-widest">{getReadinessLabel(decision.readinessScore)}</div>
-          </div>
-        </div>
-
-        {/* Alerts / Blindspots */}
-        {blindSpots.length > 0 && (
-          <div className="mb-12 bg-orange-50 border border-orange-200 rounded-2xl p-6">
-            <div className="flex items-center gap-2 text-orange-800 mb-4">
-              <ShieldAlert className="w-5 h-5" />
-              <h2 className="font-bold text-lg">AI Blind Spot Detection</h2>
-            </div>
-            <p className="text-orange-700 mb-6 text-sm">
-              The AI identified {blindSpots.length} critical assumption(s) you didn't consider that could derail this decision.
-            </p>
-            <div className="grid gap-4">
-              {blindSpots.map(bs => (
-                <div key={bs.id} className="bg-white rounded-xl p-5 border border-orange-100 shadow-sm flex items-start gap-4">
-                  <div className="mt-1 bg-red-100 text-red-600 p-2 rounded-lg">
-                    <AlertTriangle className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-slate-900 mb-1">{bs.statement}</h3>
-                    <p className="text-slate-600 text-sm">{bs.reasoning}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Assumptions Grid */}
-        <div className="mb-12">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold flex items-center gap-2">
-              <Target className="w-5 h-5 text-slate-400" />
-              Core Assumptions
-            </h2>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {criticalAssumptions.map(assumption => (
-              <div key={assumption.id} className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col">
-                <div className="flex justify-between items-start mb-4">
-                  <span className={`text-xs font-bold uppercase tracking-wider px-2.5 py-1 rounded-md ${getStatusColor(assumption.status)}`}>
-                    {assumption.status}
-                  </span>
-                  <span className="text-xs font-semibold text-slate-400 uppercase tracking-widest bg-slate-50 px-2 py-1 rounded">
-                    {assumption.importance}
-                  </span>
-                </div>
-                <h3 className="font-semibold text-slate-900 leading-snug mb-3">
-                  {assumption.statement}
-                </h3>
-                <p className="text-sm text-slate-500 mb-6 flex-grow">
-                  {assumption.reasoning}
-                </p>
-                <div className="pt-4 border-t border-slate-100 mt-auto flex justify-between items-center">
-                  <span className="text-xs font-medium text-slate-400 uppercase">{assumption.category.replace('_', ' ')}</span>
-                  <button className="text-sm font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1 cursor-not-allowed opacity-50">
-                    Add Evidence <ArrowRight className="w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </main>
-    </div>
+    </>
   );
 }
