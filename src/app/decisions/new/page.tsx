@@ -56,13 +56,13 @@ export default function NewDecision() {
 <form className="space-y-8 relative z-10" onSubmit={handleSubmit}>
 {/* Objective Input */}
 <div className="group">
-<label className="block font-mono-label text-mono-label text-primary mb-2 uppercase" for="objective">Strategic Objective</label>
+<label className="block font-mono-label text-mono-label text-primary mb-2 uppercase" htmlFor="objective">Strategic Objective</label>
 <input className="w-full terminal-input font-body-lg text-body-lg py-2" id="objective" placeholder="e.g., Optimize Q3 supply chain routing for European markets" required type="text" value={statement} onChange={(e) => setStatement(e.target.value)} />
 </div>
 {/* Parameters Grid */}
 <div className="grid grid-cols-1 md:grid-cols-2 gap-bento-gap">
 <div className="group">
-<label className="block font-mono-label text-mono-label text-on-surface-variant mb-2 uppercase" for="risk-tolerance">Risk Tolerance</label>
+<label className="block font-mono-label text-mono-label text-on-surface-variant mb-2 uppercase" htmlFor="risk-tolerance">Risk Tolerance</label>
 <select className="w-full terminal-input font-body-md text-body-md py-2 appearance-none bg-transparent" id="risk-tolerance">
 <option className="bg-surface-container" value="low">Low (Conservative)</option>
 <option className="bg-surface-container" selected="" value="medium">Medium (Balanced)</option>
@@ -70,7 +70,7 @@ export default function NewDecision() {
 </select>
 </div>
 <div className="group">
-<label className="block font-mono-label text-mono-label text-on-surface-variant mb-2 uppercase" for="time-horizon">Time Horizon</label>
+<label className="block font-mono-label text-mono-label text-on-surface-variant mb-2 uppercase" htmlFor="time-horizon">Time Horizon</label>
 <select className="w-full terminal-input font-body-md text-body-md py-2 appearance-none bg-transparent" id="time-horizon">
 <option className="bg-surface-container" value="short">Short-term (0-3 Months)</option>
 <option className="bg-surface-container" selected="" value="medium">Medium-term (3-12 Months)</option>
@@ -80,7 +80,7 @@ export default function NewDecision() {
 </div>
 {/* Data Sources Input */}
 <div className="group">
-<label className="block font-mono-label text-mono-label text-on-surface-variant mb-2 uppercase" for="data-sources">Data Ingestion Endpoints (Optional)</label>
+<label className="block font-mono-label text-mono-label text-on-surface-variant mb-2 uppercase" htmlFor="data-sources">Data Ingestion Endpoints (Optional)</label>
 <textarea className="w-full terminal-input font-quote-data text-quote-data py-2 resize-none" id="data-sources" placeholder="Provide URLs or connection strings for bespoke datasets..." rows="2"></textarea>
 </div>
 {/* Action Bar */}
@@ -110,61 +110,6 @@ export default function NewDecision() {
 </div>
 </div>
 </div>
-<script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const executeBtn = document.getElementById('execute-btn');
-            const overlay = document.getElementById('ai-overlay');
-            const terminalLog = document.getElementById('terminal-log');
-            
-            const logMessages = [
-                "> INITIATING PREFLIGHT PROTOCOL...",
-                "> PARSING STRATEGIC OBJECTIVE...",
-                "> ALLOCATING COMPUTE CLUSTERS...",
-                "> INGESTING MARKET SENTIMENT DATA...",
-                "> RUNNING MONTE CARLO SIMULATIONS (N=10,000)...",
-                "> OPTIMIZING DECISION TREE...",
-                "> GENERATING FORECAST MODELS..."
-            ];
-
-            executeBtn.addEventListener('click', () => {
-                overlay.classList.add('active');
-                
-                let messageIndex = 0;
-                terminalLog.innerHTML = ''; // clear
-
-                const interval = setInterval(() => {
-                    if (messageIndex < logMessages.length) {
-                        const p = document.createElement('p');
-                        p.textContent = logMessages[messageIndex];
-                        p.style.opacity = '0';
-                        terminalLog.appendChild(p);
-                        
-                        // Fade in
-                        setTimeout(() => p.style.opacity = '1', 50);
-                        
-                        // Keep only last 4 messages visible for terminal effect
-                        if (terminalLog.children.length > 4) {
-                            terminalLog.removeChild(terminalLog.firstChild);
-                        }
-                        
-                        messageIndex++;
-                    } else {
-                        clearInterval(interval);
-                        // Simulate redirect or completion
-                        setTimeout(() => {
-                            const p = document.createElement('p');
-                            p.textContent = "> ANALYSIS COMPLETE. READY.";
-                            p.className = "text-primary";
-                            terminalLog.appendChild(p);
-                            if (terminalLog.children.length > 4) {
-                                terminalLog.removeChild(terminalLog.firstChild);
-                            }
-                        }, 500);
-                    }
-                }, 800);
-            });
-        });
-    </script>
 
     </div>
   );

@@ -256,12 +256,6 @@ export default function Home() {
 </ul>
 </div>
 </footer>
-<style>
-        @keyframes marquee {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-50%); }
-        }
-    </style>
 
     </div>
   );
