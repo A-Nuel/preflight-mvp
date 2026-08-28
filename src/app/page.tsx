@@ -72,15 +72,15 @@ export default function Home() {
                 The high-stakes analytics engine built for strategic foresight. Aggregate intelligence, run multi-variable experiments, and crystallize decisions before they happen.
             </p>
 <div className="flex flex-col sm:flex-row items-center gap-6">
-<button className="relative group bg-primary text-on-primary font-mono-label text-mono-label px-10 py-5 rounded-full overflow-hidden transition-all duration-300 active:scale-95 shadow-[0_0_20px_rgba(192,193,255,0.3)] hover:shadow-[0_0_40px_rgba(192,193,255,0.6)] font-bold">
+<Link href="/decisions/new" className="relative group bg-primary text-on-primary font-mono-label text-mono-label px-10 py-5 rounded-full overflow-hidden transition-all duration-300 active:scale-95 shadow-[0_0_20px_rgba(192,193,255,0.3)] hover:shadow-[0_0_40px_rgba(192,193,255,0.6)] font-bold">
 <div className="absolute inset-0 bg-white/30 w-full h-full transform -translate-x-full group-hover:translate-x-full transition-transform duration-500 ease-in-out"></div>
 <span className="relative flex items-center gap-3">
                         START A DECISION <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
 </span>
-</button>
-<button className="text-on-surface-variant hover:text-on-surface font-mono-label text-mono-label px-8 py-4 rounded-full border border-white/10 hover:border-white/30 hover:bg-white/5 transition-all duration-300">
-                    VIEW SYSTEM LOGS
-                </button>
+</Link>
+<Link href="/demo" className="text-on-surface-variant hover:text-on-surface font-mono-label text-mono-label px-8 py-4 rounded-full border border-white/10 hover:border-white/30 hover:bg-white/5 transition-all duration-300">
+                    EXPLORE LIVE DEMO
+                </Link>
 </div>
 </section>
 {/* Bento Grid Section */}
